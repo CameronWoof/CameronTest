@@ -248,6 +248,16 @@
 /* -------------------- Chem Precursors -------------------- */
 /* ========================================================= */
 
+/obj/item/reagent_containers/glass/bottle/chemstore
+	name = "chemical storage bottle"
+	desc = "A chemical storage bottle."
+	icon_state = "reagent_bottle"
+	initial_volume = 50
+	amount_per_transfer_from_this = 5
+
+	New()
+		..()
+
 /obj/item/reagent_containers/glass/bottle/oil
 	name = "oil bottle"
 	desc = "A reagent storage bottle."

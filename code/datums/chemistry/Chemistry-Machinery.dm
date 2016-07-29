@@ -655,6 +655,21 @@
 			src.updateUsrDialog()
 			return
 
+		else if (href_list["createbottlelarge"])
+			var/input_name = input(usr, "Name the bottle:", "Name", R.get_master_reagent_name()) as null|text
+			var/bottlename = copytext(html_encode(input_name), 1, 32)
+			if (!bottlename)
+				return
+			if (bottlename == " ")
+				bottlename = R.get_master_reagent_name()
+			var/obj/item/reagent_containers/glass/bottle/P = new/obj/item/reagent_containers/glass/bottle/chemstore(src.loc)
+			P.name = "[bottlename] bottle"
+			P.amount_per_transfer_from_this = 10
+			P.icon_state = "reagent_bottle"
+			R.trans_to(P,50)
+			src.updateUsrDialog()
+			return
+
 		else if (href_list["createpill"])
 			var/input_name = input(usr, "Name the pill:", "Name", R.get_master_reagent_name()) as null|text
 			var/pillname = copytext(html_encode(input_name), 1, 32)
@@ -800,6 +815,7 @@
 				dat += "<BR><A href='?src=\ref[src];createpill=1'>Create pill (100 units max)</A><BR>"
 				dat += "<A href='?src=\ref[src];multipill=1'>Create multiple pills (5 units min)</A><BR>"
 				dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)</A><BR>"
+				dat += "<A href='?src=\ref[src];createbottlelarge=1'>Create large bottle (50 units max)</A><BR>"
 				dat += "<A href='?src=\ref[src];createpatch=1'>Create patch (40 units max)</A><BR>"
 				dat += "<A href='?src=\ref[src];multipatch=1'>Create multiple patches (5 units min)</A>"
 		user << browse("<TITLE>Chemmaster 3000</TITLE>Chemmaster menu:<BR><BR>[dat]", "window=chem_master;size=575x400")
